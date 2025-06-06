@@ -1,4 +1,5 @@
 import os
+import time
 import requests
 from dotenv import load_dotenv
 
@@ -55,7 +56,7 @@ def get_docling_health():
         raise Exception(f"Failed to get Docling health: {str(e)}")
 
 if __name__ == "__main__":
-    test_file_path = "test_document.pdf"  # Replace with your test file path
+    test_file_path = "Ben West CV.pdf"  # Replace with your test file path
     # Create a dummy test file for demonstration
     if not os.path.exists(test_file_path):
         with open(test_file_path, 'w') as f:
