@@ -71,7 +71,7 @@ class RAGPipeline:
                 "error": str(e)
             }
 
-    def query_documents(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+    def query_documents(self, query: str, top_k: int = 3) -> List[Dict[str, Any]]:
         """
         Query the document store with a natural language question
         """
@@ -88,10 +88,11 @@ class RAGPipeline:
             formatted_results = []
             for result in results:
                 formatted_results.append({
-                    "document_id": result[0],
-                    "filename": result[1],
-                    "content": result[2][:500] + "..." if len(result[2]) > 500 else result[2],  # Truncate for display
-                    "full_content": result[2]
+                    "document_id": result["id"],
+                    "filename": result["filename"],
+                    "content": result["content"][:500] + "...",
+                    "similarity_score": result["similarity"],  # Truncate for display
+                    "full_content": result["content"],  # Full content for detailed view
                 })
             
             return formatted_results
@@ -105,9 +106,16 @@ class RAGPipeline:
         Retrieve a specific document by ID
         """
         try:
-            # This would need to be implemented in your vector_store
-            # For now, return a placeholder
-            return {"error": "get_document_by_id not implemented yet"}
+            document = self.vector_store.get_document_by_id(document_id)
+            if not document:
+                return {"error": "Document not found"}
+            return {
+                "document_id": document["id"],
+                "filename": document["filename"],
+                "file_url": document["file_url"],
+                "content": document["content"],
+                "metadata": document["metadata"]
+            }
         except Exception as e:
             return {"error": str(e)}
 
