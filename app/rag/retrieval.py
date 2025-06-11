@@ -1,8 +1,8 @@
 import uuid
 import os
 from typing import List, Dict, Any
-from app.rag.storage import upload_file_to_s3, download_file_from_s3
-from app.rag.docling_client import process_document_with_docling
+from app.rag.storage import upload_file_to_s3
+from app.rag.docling_client import process_document_with_docling_from_url
 from app.rag.embedding import get_embedding
 from app.db.vector_store import VectorStore
 
@@ -11,7 +11,7 @@ class RAGPipeline:
         self.vector_store = VectorStore()
         self.vector_store.connect()
 
-    def process_document(self, file_obj, filename: str) -> Dict[str, Any]:
+    def process_document(self, file_obj, filename: str) -> dict:
         """
         Complete pipeline: upload -> process -> embed -> store
         """
@@ -19,21 +19,18 @@ class RAGPipeline:
             # Step 1: Upload file to MinIO
             file_url = upload_file_to_s3(file_obj, filename)
             print(f"File uploaded to: {file_url}")
-
-            # Step 2: Download file for processing (if needed)
-            # For now, we'll assume Docling can work with the file object directly
             
-            # Step 3: Process document with Docling
-            processed_text = process_document_with_docling(file_obj, filename)
+            # Step 2: Process document with Docling
+            processed_text = process_document_with_docling_from_url(file_url)
             if not processed_text:
                 raise Exception("Failed to process document with Docling")
             
-            # Step 4: Generate embedding
+            # Step 3: Generate embedding
             embedding = get_embedding(processed_text)
             if not embedding:
                 raise Exception("Failed to generate embedding")
 
-            # Step 5: Store in database
+            # Step 4: Store in database
             document_id = str(uuid.uuid4())
             embedding_id = str(uuid.uuid4())
             
