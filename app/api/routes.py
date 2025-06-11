@@ -1,5 +1,4 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
-from app.rag.storage import upload_file_to_s3
+from fastapi import APIRouter, UploadFile, File, HTTPException, Query
 from app.rag.retrieval import process_uploaded_file, search_documents, RAGPipeline
 
 router = APIRouter()

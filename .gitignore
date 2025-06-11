@@ -1,5 +1,7 @@
 .env
 app/__pycache__/
 app/api/__pycache__/
+app/db/__pycache__/
+app/rag/__pycache__/
 
 Ben West CV.pdf
