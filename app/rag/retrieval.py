@@ -138,7 +138,7 @@ def process_uploaded_file(file_obj, filename: str) -> Dict[str, Any]:
     finally:
         pipeline.close()
 
-def search_documents(query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+def search_documents(query: str, top_k: int = 3) -> List[Dict[str, Any]]:
     """
     Search documents with a query
     """
