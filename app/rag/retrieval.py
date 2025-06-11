@@ -10,6 +10,7 @@ class RAGPipeline:
     def __init__(self):
         self.vector_store = VectorStore()
         self.vector_store.connect()
+        self.vector_store.create_tables()
 
     def process_document(self, file_obj, filename: str) -> dict:
         """
@@ -42,7 +43,7 @@ class RAGPipeline:
             }
             
             self.vector_store.insert_document(
-                id=document_id,
+                document_id=document_id,
                 filename=filename,
                 file_url=file_url,
                 content=processed_text,
@@ -51,7 +52,7 @@ class RAGPipeline:
             
             # Store embedding
             self.vector_store.insert_embedding(
-                id=embedding_id,
+                embedding_id=embedding_id,
                 document_id=document_id,
                 embedding=embedding
             )

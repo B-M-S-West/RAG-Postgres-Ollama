@@ -1,5 +1,7 @@
 import psycopg2
 import psycopg2.extras
+import json
+import numpy as np
 import os
 from dotenv import load_dotenv
 
@@ -46,13 +48,14 @@ class VectorStore:
                     filename TEXT,
                     file_url TEXT,
                     content TEXT,
-                    metadata JSONB
+                    metadata JSONB,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
                 
                 CREATE TABLE IF NOT EXISTS embeddings (
                     id UUID PRIMARY KEY,
                     document_id UUID REFERENCES documents(id),
-                    embedding vector(1536),
+                    embedding vector(768),
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
             """)
@@ -71,7 +74,7 @@ class VectorStore:
             cur.execute("""
                 INSERT INTO documents (id, filename, file_url, content, metadata, created_at)
                 VALUES (%s, %s, %s, %s, %s, NOW())
-            """, (document_id, filename, file_url, content, metadata))
+            """, (document_id, filename, file_url, content, json.dumps(metadata)))
             self.conn.commit()
             print("Document inserted successfully.")
         except psycopg2.Error as e:
@@ -84,6 +87,11 @@ class VectorStore:
         
         cur = self.conn.cursor()
         try:
+            # Ensure embedding is a flat list of floats
+            if hasattr(embedding, 'flatten'):
+                embedding = embedding.flatten().tolist()
+            elif isinstance(embedding, list) and len(embedding) > 0 and isinstance(embedding[0], list):
+                embedding = embedding[0]  # Handle nested lists
             cur.execute("""
                 INSERT INTO embeddings (id, document_id, embedding)
                 VALUES (%s, %s, %s)
