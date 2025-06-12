@@ -19,3 +19,23 @@ if uploaded_file is not None:
                 st.json(response.json())
             else:
                 st.error(f"Error: {response.text}")
+
+st.header("Query the Knowledge Base")
+query = st.text_input("Enter your query")
+
+if st.button("Submit Query"):
+    params = {"q": query}
+    with st.spinner("Searching..."):
+        response = requests.get(f"{BACKEND_URL}/query", params=params)
+        if response.status_code == 200:
+            results = response.json()["results"]
+            st.subheader("Query results:")
+            if results:
+                for result in results:
+                    st.write(f"**Document ID:** {result['id']}")
+                    st.write(f"**Content:** {result['content']}")
+            else:
+                st.write("No results found.")
+        else:
+            st.error(f"Error: {response.text}")
+
