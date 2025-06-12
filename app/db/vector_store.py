@@ -175,6 +175,40 @@ class VectorStore:
 
         result = self.execute_query(query, (document_id,))
         return result[0] if result else None
+    
+    def list_documents(self):
+        """Get all documents with their metadata"""
+        if not self.conn:
+            return []
+        
+        cur = self.conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        try:
+            cur.execute("""
+                SELECT id, filename, file_url, content, metadata, created_at
+                FROM documents
+                ORDER BY created_at DESC
+            """)
+            return cur.fetchall()
+        except psycopg2.Error as e:
+            print(f"Error listing documents: {e}")
+            return []
+
+    def delete_document(self, document_id: str):
+        """Delete document and its embeddings"""
+        if not self.conn:
+            return False
+        
+        cur = self.conn.cursor()
+        try:
+            # Delete embeddings first due to foreign key constraint
+            cur.execute("DELETE FROM embeddings WHERE document_id = %s", (document_id,))
+            cur.execute("DELETE FROM documents WHERE id = %s", (document_id,))
+            self.conn.commit()
+            return True
+        except psycopg2.Error as e:
+            print(f"Error deleting document: {e}")
+            self.conn.rollback()
+            return False
 
 
 if __name__ == "__main__":
