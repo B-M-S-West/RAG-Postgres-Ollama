@@ -105,14 +105,21 @@ class VectorStore:
         if not self.conn:
             print("Connection not established.")
             return []
+
+            # Ensure embedding is a flat 1-D list
+        if hasattr(query_embedding, 'flatten'):
+            query_embedding = query_embedding.flatten().tolist()
+        elif isinstance(query_embedding, list) and len(query_embedding) > 0 and isinstance(query_embedding[0], list):
+            # Handle nested lists
+            query_embedding = query_embedding[0]
         
-        cur = self.conn.cursor()
+        cur = self.conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         try:
             cur.execute("""
-                SELECT d.id, d.filename, d.content, (e.embedding <-> %s) AS similarity
+                SELECT d.id, d.filename, d.content, (e.embedding <-> %s::vector) AS similarity
                 FROM documents d
                 JOIN embeddings e ON d.id = e.document_id
-                ORDER BY e.embedding <-> %s
+                ORDER BY e.embedding <-> %s::vector
                 LIMIT %s
             """, (query_embedding, query_embedding, top_k))
             results = cur.fetchall()

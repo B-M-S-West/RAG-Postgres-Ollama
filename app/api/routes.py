@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query
 from app.rag.retrieval import process_uploaded_file, search_documents, RAGPipeline
 from app.models import DocumentList, DocumentResponse
+import os
 
 router = APIRouter()
 

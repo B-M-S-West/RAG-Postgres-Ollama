@@ -63,7 +63,7 @@ if st.button("Submit Query"):
             st.subheader("Query results:")
             if results:
                 for result in results:
-                    st.write(f"**Document ID:** {result['id']}")
+                    st.write(f"**Document ID:** {result['document_id']}")
                     st.write(f"**Content:** {result['content']}")
             else:
                 st.write("No results found.")
