@@ -3,6 +3,13 @@ from datetime import datetime
 from typing import Dict, Any, Optional, List
 from enum import Enum
 
+class DocumentType(str, Enum):
+    RESUME = "resume"
+    ACADEMIC_PAPER = "academic_paper"
+    BUSINESS_REPORT = "business_report"
+    MANUAL = "manual"
+    GENERAL_DOCUMENT = "general_document"
+
 class ChunkingStrategy(str, Enum):
     SEMANTIC = "semantic"
     FIXED_SIZE = "fixed_size"
@@ -26,6 +33,7 @@ class ProcessedDocument(BaseModel):
     filename: str
     file_url: str
     content: str
+    doc_type: DocumentType
     chunking_strategy: ChunkingStrategy
     chunks: List[DocumentChunk]
     processing_time: float
@@ -39,6 +47,7 @@ class DocumentResponse(BaseModel):
     created_at: datetime
     metadata: Dict[str, Any]
     content_preview: Optional[str] = None
+    doc_type: Optional[DocumentType] = None
     chunk_count: Optional[int] = None
 
 class DocumentList(BaseModel):
@@ -48,6 +57,7 @@ class QueryRequest(BaseModel):
     query: str
     top_k: int = 5
     filters: Optional[Dict[str, Any]] = None
+    doc_types: Optional[List[DocumentType]] = None
 
 class QueryResult(BaseModel):
     document_id: str
@@ -56,6 +66,7 @@ class QueryResult(BaseModel):
     content: str
     section_title: Optional[str] = None
     similarity_score: float
+    doc_type: DocumentType
     metadata: Dict[str, Any] = {}
 
 class QueryResponse(BaseModel):
@@ -70,3 +81,4 @@ class RAGResponse(BaseModel):
     context_chunks: int
     confidence_score: Optional[float] = None
     processing_time: float
+
