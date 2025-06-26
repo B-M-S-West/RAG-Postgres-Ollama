@@ -7,7 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from typing import Dict, List, Any
 
-BACKEND_URL = "http://localhost:8000"
+BACKEND_URL = "http://localhost:8001"
 
 st.set_page_config(
     page_title="RAG System",

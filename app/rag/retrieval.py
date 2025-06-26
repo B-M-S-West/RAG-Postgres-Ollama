@@ -2,11 +2,11 @@ import os
 import uuid
 import time
 from typing import List, Dict, Any, Optional
-from rag.storage import upload_file_to_s3
-from rag.docling_client import process_document_with_docling_from_url
-from rag.embedding import get_embedding
-from db.vector_store import VectorStore
-from rag.chunking import chunk_document
+from app.rag.storage import upload_file_to_s3
+from app.rag.docling_client import process_document_with_docling_from_url
+from app.rag.embedding import get_embedding
+from app.db.vector_store import VectorStore
+from app.rag.chunking import chunk_document
 
 class RAGPipeline:
     def __init__(self):
