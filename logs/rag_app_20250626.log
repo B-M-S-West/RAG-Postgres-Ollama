@@ -1,0 +1,591 @@
+2025-06-26 21:47:34,159 - uvicorn.error - INFO - Will watch for changes in these directories: ['/home/ben-west/coding/RAG-Postgres-Ollama']
+2025-06-26 21:47:34,161 - uvicorn.error - INFO - Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
+2025-06-26 21:47:34,162 - uvicorn.error - INFO - Started reloader process [618109] using WatchFiles
+2025-06-26 21:47:35,439 - uvicorn.error - INFO - Started server process [618133]
+2025-06-26 21:47:35,440 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 21:47:35,442 - app.main - INFO - RAG Application starting up...
+2025-06-26 21:47:35,442 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 21:47:35,531 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:35,884 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:36,236 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:36,588 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:36,939 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:37,291 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:37,643 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:37,995 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:38,347 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:38,699 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:39,051 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:39,402 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:39,754 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:40,106 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:40,458 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:40,810 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:41,162 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:41,514 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:41,866 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:42,218 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:42,570 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:42,922 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:43,274 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:43,625 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:43,977 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:44,329 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:44,681 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:45,033 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:45,385 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:45,738 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:46,089 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:46,441 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:46,793 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:47,145 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:47,497 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:47,849 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:48,201 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:48,552 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:48,904 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:49,256 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:49,608 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:49,960 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:50,313 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:50,664 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:51,017 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:51,369 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:51,721 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:52,073 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:52,425 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:52,777 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:53,130 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:53,481 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:53,833 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:54,185 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:54,537 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:54,889 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:55,241 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:55,593 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:55,945 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:56,297 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:56,649 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:57,001 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:57,353 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:57,704 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:58,056 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:58,407 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:58,759 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:59,110 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:59,462 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:47:59,814 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:48:00,166 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:48:00,518 - watchfiles.main - INFO - 1 change detected
+2025-06-26 21:48:00,669 - uvicorn.error - INFO - Shutting down
+2025-06-26 21:48:00,771 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 21:48:00,773 - app.main - INFO - RAG Application shutting down...
+2025-06-26 21:48:00,773 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 21:48:00,774 - uvicorn.error - INFO - Finished server process [618133]
+2025-06-26 21:48:00,786 - uvicorn.error - INFO - Stopping reloader process [618109]
+2025-06-26 21:50:18,480 - uvicorn.error - INFO - Will watch for changes in these directories: ['/home/ben-west/coding/RAG-Postgres-Ollama']
+2025-06-26 21:50:18,482 - uvicorn.error - INFO - Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
+2025-06-26 21:50:18,483 - uvicorn.error - INFO - Started reloader process [618401] using WatchFiles
+2025-06-26 21:50:19,725 - uvicorn.error - INFO - Started server process [618425]
+2025-06-26 21:50:19,727 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 21:50:19,727 - app.main - INFO - RAG Application starting up...
+2025-06-26 21:50:19,728 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 21:51:12,676 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:51:12,691 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:51:12,692 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:51:12,695 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:51:12,695 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:51:19,342 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:51:19,357 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:51:19,358 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:51:19,361 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:51:19,362 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:51:23,582 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:51:23,597 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:51:23,597 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:51:23,601 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:51:23,601 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:55:33,043 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 21:55:33,056 - uvicorn.error - INFO - Shutting down
+2025-06-26 21:55:33,158 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 21:55:33,160 - app.main - INFO - RAG Application shutting down...
+2025-06-26 21:55:33,160 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 21:55:33,161 - uvicorn.error - INFO - Finished server process [618425]
+2025-06-26 21:55:34,462 - uvicorn.error - INFO - Started server process [618889]
+2025-06-26 21:55:34,463 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 21:55:34,465 - app.main - INFO - RAG Application starting up...
+2025-06-26 21:55:34,465 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 21:56:02,153 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:56:02,168 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:56:02,168 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:56:02,172 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:56:02,172 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:56:08,516 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:56:08,532 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:56:08,532 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:56:08,535 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:56:08,536 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:56:11,179 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:56:11,193 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:56:11,194 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:56:11,197 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:56:11,198 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:57:45,663 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 21:57:45,696 - uvicorn.error - INFO - Shutting down
+2025-06-26 21:57:45,797 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 21:57:45,800 - app.main - INFO - RAG Application shutting down...
+2025-06-26 21:57:45,800 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 21:57:45,801 - uvicorn.error - INFO - Finished server process [618889]
+2025-06-26 21:57:47,032 - uvicorn.error - INFO - Started server process [619090]
+2025-06-26 21:57:47,034 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 21:57:47,035 - app.main - INFO - RAG Application starting up...
+2025-06-26 21:57:47,035 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 21:57:54,410 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 21:57:54,473 - uvicorn.error - INFO - Shutting down
+2025-06-26 21:57:54,576 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 21:57:54,578 - app.main - INFO - RAG Application shutting down...
+2025-06-26 21:57:54,579 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 21:57:54,580 - uvicorn.error - INFO - Finished server process [619090]
+2025-06-26 21:57:55,783 - uvicorn.error - INFO - Started server process [619164]
+2025-06-26 21:57:55,785 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 21:57:55,785 - app.main - INFO - RAG Application starting up...
+2025-06-26 21:57:55,786 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 21:58:00,704 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:58:00,719 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:58:00,719 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:58:00,723 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:58:00,723 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:58:04,683 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:58:04,698 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:58:04,699 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:58:04,702 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:58:04,702 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:58:08,134 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:58:08,149 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:58:08,149 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:58:08,153 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:58:08,153 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:58:17,131 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:58:17,148 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:58:17,148 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:58:17,152 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:58:17,153 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:58:19,079 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:58:19,094 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:58:19,094 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:58:19,098 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:58:19,098 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:59:21,970 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 21:59:22,071 - uvicorn.error - INFO - Shutting down
+2025-06-26 21:59:22,174 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 21:59:22,176 - app.main - INFO - RAG Application shutting down...
+2025-06-26 21:59:22,176 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 21:59:22,177 - uvicorn.error - INFO - Finished server process [619164]
+2025-06-26 21:59:23,399 - uvicorn.error - INFO - Started server process [619361]
+2025-06-26 21:59:23,400 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 21:59:23,401 - app.main - INFO - RAG Application starting up...
+2025-06-26 21:59:23,401 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 21:59:27,650 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:59:27,664 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:59:27,664 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:59:27,668 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:59:27,668 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:59:31,069 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:59:31,085 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:59:31,085 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:59:31,089 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:59:31,089 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:59:34,141 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:59:34,156 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:59:34,156 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:59:34,160 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:59:34,160 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:59:35,671 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:59:35,687 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:59:35,687 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:59:35,692 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:59:35,692 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:59:39,259 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:59:39,274 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:59:39,274 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:59:39,278 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:59:39,278 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:59:40,584 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:59:40,600 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:59:40,600 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:59:40,604 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:59:40,604 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:59:54,237 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:59:54,252 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:59:54,252 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:59:54,256 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:59:54,256 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 21:59:56,975 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 21:59:56,990 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 21:59:56,990 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 21:59:56,994 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 21:59:56,994 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:00:01,547 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:00:01,562 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:00:01,563 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:00:01,566 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:00:01,567 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:00:03,526 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:00:03,542 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:00:03,542 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:00:03,546 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:00:03,547 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:00:05,268 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:00:05,285 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:00:05,285 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:00:05,287 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:00:05,287 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:00:06,349 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:00:06,364 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:00:06,364 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:00:06,368 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:00:06,368 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:00:08,084 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:00:08,100 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:00:08,100 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:00:08,104 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:00:08,105 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:01:54,152 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:01:54,209 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:01:54,311 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:01:54,313 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:01:54,313 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:01:54,314 - uvicorn.error - INFO - Finished server process [619361]
+2025-06-26 22:01:55,507 - uvicorn.error - INFO - Started server process [619692]
+2025-06-26 22:01:55,509 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:01:55,510 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:01:55,511 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:04:32,190 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:04:32,272 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:04:32,374 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:04:32,376 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:04:32,377 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:04:32,378 - uvicorn.error - INFO - Finished server process [619692]
+2025-06-26 22:04:33,589 - uvicorn.error - INFO - Started server process [619784]
+2025-06-26 22:04:33,591 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:04:33,592 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:04:33,592 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:04:45,408 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:04:45,456 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:04:45,557 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:04:45,560 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:04:45,560 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:04:45,561 - uvicorn.error - INFO - Finished server process [619784]
+2025-06-26 22:04:46,828 - uvicorn.error - INFO - Started server process [619895]
+2025-06-26 22:04:46,829 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:04:46,831 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:04:46,831 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:04:47,480 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:04:47,535 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:04:47,637 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:04:47,639 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:04:47,640 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:04:47,641 - uvicorn.error - INFO - Finished server process [619895]
+2025-06-26 22:04:48,827 - uvicorn.error - INFO - Started server process [619932]
+2025-06-26 22:04:48,828 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:04:48,829 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:04:48,829 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:06:04,150 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:06:04,245 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:06:04,347 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:06:04,348 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:06:04,348 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:06:04,350 - uvicorn.error - INFO - Finished server process [619932]
+2025-06-26 22:06:05,587 - uvicorn.error - INFO - Started server process [620063]
+2025-06-26 22:06:05,589 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:06:05,590 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:06:05,590 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:06:08,684 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:06:08,707 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:06:08,809 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:06:08,810 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:06:08,810 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:06:08,811 - uvicorn.error - INFO - Finished server process [620063]
+2025-06-26 22:06:10,006 - uvicorn.error - INFO - Started server process [620124]
+2025-06-26 22:06:10,008 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:06:10,009 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:06:10,009 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:06:31,852 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:06:31,936 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:06:32,039 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:06:32,041 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:06:32,041 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:06:32,043 - uvicorn.error - INFO - Finished server process [620124]
+2025-06-26 22:06:33,262 - uvicorn.error - INFO - Started server process [620215]
+2025-06-26 22:06:33,263 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:06:33,264 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:06:33,264 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:06:36,323 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:06:36,382 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:06:36,483 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:06:36,485 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:06:36,485 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:06:36,486 - uvicorn.error - INFO - Finished server process [620215]
+2025-06-26 22:06:37,712 - uvicorn.error - INFO - Started server process [620276]
+2025-06-26 22:06:37,713 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:06:37,714 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:06:37,714 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:07:04,054 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:07:04,062 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:07:04,165 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:07:04,166 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:07:04,166 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:07:04,167 - uvicorn.error - INFO - Finished server process [620276]
+2025-06-26 22:07:05,431 - uvicorn.error - INFO - Started server process [620368]
+2025-06-26 22:07:05,433 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:07:05,434 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:07:05,434 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:07:07,643 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:07:07,743 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:07:07,846 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:07:07,847 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:07:07,847 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:07:07,848 - uvicorn.error - INFO - Finished server process [620368]
+2025-06-26 22:07:08,964 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:07:09,169 - uvicorn.error - INFO - Started server process [620428]
+2025-06-26 22:07:09,170 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:07:09,171 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:07:09,171 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:07:10,376 - uvicorn.error - INFO - Started server process [620445]
+2025-06-26 22:07:10,377 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:07:10,378 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:07:10,378 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:07:19,420 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:07:19,518 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:07:19,620 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:07:19,622 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:07:19,622 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:07:19,623 - uvicorn.error - INFO - Finished server process [620445]
+2025-06-26 22:07:20,829 - uvicorn.error - INFO - Started server process [620532]
+2025-06-26 22:07:20,830 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:07:20,831 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:07:20,831 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:07:32,304 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:07:32,392 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:07:32,494 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:07:32,496 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:07:32,496 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:07:32,497 - uvicorn.error - INFO - Finished server process [620532]
+2025-06-26 22:07:33,804 - uvicorn.error - INFO - Started server process [620624]
+2025-06-26 22:07:33,805 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:07:33,806 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:07:33,806 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:07:33,913 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:07:34,008 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:07:34,110 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:07:34,112 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:07:34,112 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:07:34,113 - uvicorn.error - INFO - Finished server process [620624]
+2025-06-26 22:07:35,360 - uvicorn.error - INFO - Started server process [620656]
+2025-06-26 22:07:35,361 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:07:35,362 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:07:35,362 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:07:39,806 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:07:39,887 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:07:39,991 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:07:39,993 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:07:39,993 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:07:39,994 - uvicorn.error - INFO - Finished server process [620656]
+2025-06-26 22:07:41,203 - uvicorn.error - INFO - Started server process [620767]
+2025-06-26 22:07:41,204 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:07:41,205 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:07:41,205 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:07:44,172 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:07:44,220 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:07:44,322 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:07:44,324 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:07:44,324 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:07:44,324 - uvicorn.error - INFO - Finished server process [620767]
+2025-06-26 22:07:45,558 - uvicorn.error - INFO - Started server process [620844]
+2025-06-26 22:07:45,559 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:07:45,560 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:07:45,560 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:07:54,987 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/frontend.py'. Reloading...
+2025-06-26 22:07:55,009 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:07:55,111 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:07:55,113 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:07:55,113 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:07:55,114 - uvicorn.error - INFO - Finished server process [620844]
+2025-06-26 22:07:56,355 - uvicorn.error - INFO - Started server process [620939]
+2025-06-26 22:07:56,356 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:07:56,357 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:07:56,357 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:08:02,930 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:02,945 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:02,945 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:02,949 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:02,949 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:05,688 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:05,704 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:05,704 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:05,708 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:05,708 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:09,114 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:09,129 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:09,130 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:09,133 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:09,134 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:09,141 - app.api.routes - INFO - Delete request for document: 35ed868a-4965-4dff-9d28-096a10172832
+2025-06-26 22:08:09,150 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:09,157 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:09,157 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:09,280 - app.api.routes - INFO - File deleted from storage: Ben West b-m-s-west@outlook.com - BYB1.pdf
+2025-06-26 22:08:09,280 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:09,280 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:09,355 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:09,362 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:09,362 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:09,365 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:09,366 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:12,904 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:12,919 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:12,920 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:12,923 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:12,924 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:12,931 - app.api.routes - INFO - Delete request for document: 35ed868a-4965-4dff-9d28-096a10172832
+2025-06-26 22:08:12,940 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:12,947 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:12,948 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:12,964 - app.api.routes - INFO - File deleted from storage: Ben West b-m-s-west@outlook.com - BYB1.pdf
+2025-06-26 22:08:12,964 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:12,964 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:13,040 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:13,046 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:13,046 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:13,049 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:13,050 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:14,550 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:14,566 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:14,567 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:14,570 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:14,571 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:14,578 - app.api.routes - INFO - Delete request for document: 35ed868a-4965-4dff-9d28-096a10172832
+2025-06-26 22:08:14,587 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:14,593 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:14,593 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:14,608 - app.api.routes - INFO - File deleted from storage: Ben West b-m-s-west@outlook.com - BYB1.pdf
+2025-06-26 22:08:14,608 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:14,608 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:14,684 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:14,691 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:14,691 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:14,694 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:14,694 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:15,568 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:15,583 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:15,583 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:15,587 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:15,587 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:15,595 - app.api.routes - INFO - Delete request for document: 35ed868a-4965-4dff-9d28-096a10172832
+2025-06-26 22:08:15,605 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:15,612 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:15,612 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:15,627 - app.api.routes - INFO - File deleted from storage: Ben West b-m-s-west@outlook.com - BYB1.pdf
+2025-06-26 22:08:15,627 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:15,627 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:15,701 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:15,708 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:15,708 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:15,711 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:15,711 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:16,430 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:16,445 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:16,446 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:16,449 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:16,450 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:16,457 - app.api.routes - INFO - Delete request for document: 35ed868a-4965-4dff-9d28-096a10172832
+2025-06-26 22:08:16,466 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:16,473 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:16,473 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:16,488 - app.api.routes - INFO - File deleted from storage: Ben West b-m-s-west@outlook.com - BYB1.pdf
+2025-06-26 22:08:16,489 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:16,489 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:16,563 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:16,570 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:16,570 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:16,573 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:16,573 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:17,432 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:17,447 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:17,448 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:17,452 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:17,452 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:17,462 - app.api.routes - INFO - Delete request for document: 35ed868a-4965-4dff-9d28-096a10172832
+2025-06-26 22:08:17,472 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:17,479 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:17,479 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:17,494 - app.api.routes - INFO - File deleted from storage: Ben West b-m-s-west@outlook.com - BYB1.pdf
+2025-06-26 22:08:17,494 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:17,494 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:17,567 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:17,574 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:17,574 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:17,577 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:17,577 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:22,828 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:22,843 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:22,843 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:22,847 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:22,847 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:08:25,506 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:08:25,521 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:08:25,522 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:08:25,526 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:08:25,526 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:13:10,351 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/api/routes.py'. Reloading...
+2025-06-26 22:13:10,435 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:13:10,536 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:13:10,538 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:13:10,538 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:13:10,539 - uvicorn.error - INFO - Finished server process [620939]
+2025-06-26 22:13:13,866 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/api/routes.py'. Reloading...
+2025-06-26 22:13:17,135 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/api/routes.py'. Reloading...
+2025-06-26 22:13:22,768 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/api/routes.py'. Reloading...
+2025-06-26 22:13:25,181 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/api/routes.py'. Reloading...
+2025-06-26 22:13:27,995 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/api/routes.py'. Reloading...
+2025-06-26 22:13:31,866 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/api/routes.py'. Reloading...
+2025-06-26 22:13:40,360 - uvicorn.error - WARNING - WatchFiles detected changes in 'app/api/routes.py'. Reloading...
+2025-06-26 22:13:41,606 - uvicorn.error - INFO - Started server process [621733]
+2025-06-26 22:13:41,607 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-26 22:13:41,608 - app.main - INFO - RAG Application starting up...
+2025-06-26 22:13:41,609 - uvicorn.error - INFO - Application startup complete.
+2025-06-26 22:13:49,009 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:13:49,025 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:13:49,026 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:13:49,030 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:13:49,030 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:13:51,513 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:13:51,529 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:13:51,529 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:13:51,534 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:13:51,534 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:13:54,412 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:13:54,427 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:13:54,428 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:13:54,431 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:13:54,432 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:13:54,439 - app.api.routes - INFO - Delete request for document: 35ed868a-4965-4dff-9d28-096a10172832
+2025-06-26 22:13:54,449 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:13:54,455 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:13:54,455 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:13:54,577 - app.api.routes - INFO - File deleted from storage: Ben West b-m-s-west@outlook.com - BYB1.pdf
+2025-06-26 22:13:54,580 - app.db.vector_store - INFO - Document 35ed868a-4965-4dff-9d28-096a10172832 deleted successfully
+2025-06-26 22:13:54,580 - app.api.routes - INFO - Document deleted successfully: Ben West b-m-s-west@outlook.com - BYB1.pdf
+2025-06-26 22:13:54,580 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:13:54,580 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:13:54,651 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-26 22:13:54,658 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-26 22:13:54,659 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-26 22:13:54,661 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-26 22:13:54,661 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-26 22:14:35,602 - uvicorn.error - INFO - Shutting down
+2025-06-26 22:14:35,705 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-06-26 22:14:35,707 - app.main - INFO - RAG Application shutting down...
+2025-06-26 22:14:35,707 - uvicorn.error - INFO - Application shutdown complete.
+2025-06-26 22:14:35,708 - uvicorn.error - INFO - Finished server process [621733]
+2025-06-26 22:14:35,720 - uvicorn.error - INFO - Stopping reloader process [618401]

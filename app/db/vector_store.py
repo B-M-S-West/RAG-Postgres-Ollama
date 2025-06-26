@@ -6,10 +6,12 @@ import os
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 from dotenv import load_dotenv
-from app.utils.logger import get_logger
+from app.utils.logger import setup_logging
+import logging
 
 load_dotenv()
-logger = get_logger('vector_store')
+setup_logging()
+logger = logging.getLogger(__name__)
 
 class VectorStore:
     def __init__(self):

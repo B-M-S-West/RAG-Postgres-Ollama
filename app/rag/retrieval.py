@@ -7,9 +7,11 @@ from app.rag.docling_client import process_document_with_docling_from_url
 from app.rag.embedding import get_embedding
 from app.db.vector_store import VectorStore
 from app.rag.chunking import chunk_document
-from app.utils.logger import get_logger
+from app.utils.logger import setup_logging
+import logging
 
-logger = get_logger(__name__)
+setup_logging()
+logger = logging.getLogger(__name__)
 
 class RAGPipeline:
     def __init__(self):

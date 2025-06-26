@@ -2,10 +2,12 @@ import os
 import time
 import requests
 from dotenv import load_dotenv
-from app.utils.logger import get_logger
+from app.utils.logger import setup_logging
+import logging
 
 load_dotenv()
-logger = get_logger(__name__)
+setup_logging()
+logger = logging.getLogger(__name__)
 
 DOCLING_URL = os.getenv("DOCLING_URL", "http://localhost:5002")
 

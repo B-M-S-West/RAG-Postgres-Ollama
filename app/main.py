@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.api import routes
-from app.utils.logging_setup import setup_logging
+from app.utils.logger import setup_logging
 import logging
 
 # Load environmenta variables
@@ -10,6 +10,7 @@ load_dotenv()
 
 # Setup logging
 setup_logging()
+logging.getLogger("watchfiles").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()

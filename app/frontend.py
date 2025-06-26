@@ -356,9 +356,16 @@ def library_page():
                                 st.write(f"**Chunks:** {doc['chunk_count']}")
                         
                         with col2:
-                            if st.button(f"🗑️ Delete", key=f"del_{doc['document_id']}"):
-                                delete_document(doc['document_id'], doc['filename'])
-                            
+                            if st.button("🗑️ Delete", key=f"del_btn_{doc['document_id']}"):
+                                try:
+                                    response = requests.delete(f"{BACKEND_URL}/documents/{doc['document_id']}")
+                                    if response.status_code == 200:
+                                        st.success(f"✅ Deleted '{doc['filename']}' successfully!")
+                                        st.rerun()
+                                    else:
+                                        st.error(f"❌ Failed to delete document: {response.text}")
+                                except Exception as e:
+                                    st.error(f"❌ Error: {str(e)}")
                             if st.button(f"🔍 Find Similar", key=f"sim_{doc['document_id']}"):
                                 find_similar_documents(doc['document_id'])
             else:
@@ -369,19 +376,6 @@ def library_page():
             
     except Exception as e:
         st.error(f"Error loading documents: {str(e)}")
-
-def delete_document(document_id: str, filename: str):
-    """Delete a document"""
-    if st.confirm(f"Are you sure you want to delete '{filename}'?"):
-        try:
-            response = requests.delete(f"{BACKEND_URL}/documents/{document_id}")
-            if response.status_code == 200:
-                st.success(f"✅ Deleted '{filename}' successfully!")
-                st.rerun()
-            else:
-                st.error(f"❌ Failed to delete document: {response.text}")
-        except Exception as e:
-            st.error(f"❌ Error: {str(e)}")
 
 def find_similar_documents(document_id: str):
     """Find similar documents"""

@@ -3,10 +3,12 @@ from typing import Optional, List, Dict, Any
 from app.rag.retrieval import process_uploaded_file, search_documents, generate_rag_answer, RAGPipeline
 from app.rag.storage import get_s3_client
 from app.models import DocumentList, DocumentResponse, QueryRequest, QueryResponse, RAGResponse, DocumentType, QueryResult
-from app.utils.logger import get_logger
+from app.utils.logger import setup_logging
 import os
+import logging
 
-logger = get_logger(__name__)
+setup_logging()
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -288,16 +290,16 @@ async def delete_document(document_id: str):
             logger.warning(f"Could not delete file from storage: {e}")
             
             # Then delete from database
-            success = pipeline.vector_store.delete_document(document_id)
-            if success:
-                logger.info(f"Document deleted successfully: {doc['filename']}")
-                return {
-                    "status": "success",
-                    "message": f"Document {doc['filename']} deleted successfully"
-                    }
-            else:
-                logger.error(f"Failed to delete document from database: {document_id}")
-                raise HTTPException(status_code=404, detail="Failed to delete document from database")
+        success = pipeline.vector_store.delete_document(document_id)
+        if success:
+            logger.info(f"Document deleted successfully: {doc['filename']}")
+            return {
+                "status": "success",
+                "message": f"Document {doc['filename']} deleted successfully"
+                }
+        else:
+            logger.error(f"Failed to delete document from database: {document_id}")
+            raise HTTPException(status_code=404, detail="Failed to delete document from database")
     finally:
         pipeline.close()
 
