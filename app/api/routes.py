@@ -27,7 +27,7 @@ async def get_database_stats():
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         pipeline.close()
-    
+
 @router.post("/process")
 async def process_file(
     file: UploadFile = File(...),
@@ -71,13 +71,12 @@ async def process_file(
             "stored_chunks": result["stored_chunks"],
             "processing_time": result["processing_time"]
         }
-
     except HTTPException:
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@router.get("/query",response_model=QueryResponse)
+@router.post("/query/advanced",response_model=QueryResponse)
 async def query_documents_endpoints(request: QueryRequest):
     """
     Query documents with advanced filtering

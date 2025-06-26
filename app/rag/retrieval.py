@@ -242,10 +242,10 @@ class RAGPipeline:
                 chunk_text = chunk['content']
                 source_info = f"[Source: {i+}: {chunk['filename']}]"
 
-                if total_length + len(chunk_context) > max_context_length: break
+                if total_length + len(chunk_text) > max_context_length: break
 
-                context_parts.append(chunk_context)
-                total_length += len(chunk_context)
+                context_parts.append(chunk_text)
+                total_length += len(chunk_text)
 
             context = "\n\n".join(context_parts)
 
@@ -267,7 +267,7 @@ class RAGPipeline:
             return {
                 "answer": answer,
                 "sources": list(set(chunk['filename'] for chunk in context_chunks)),
-                "context_chunks_used": len(context_parts),
+                "context_chunks": len(context_parts),
                 "total_context_length": total_length,
                 "confidence": 0.8,  # Placeholder
             }
@@ -276,27 +276,11 @@ class RAGPipeline:
             return {
                 "answer": f"Error generating answer: {str(e)}",
                 "sources": [],
-                "context_chunks_used": 0,
+                "context_chunks": 0,
                 "total_context_length": 0,
                 "confidence": 0.0,
             }
-        
-    def get_document_by_id(self, document_id: str) -> Dict[str, Any]:
-        """
-        Retrieve a specific document by ID
-        """
-        try:
-            document = self.vector_store.get_document_by_id(document_id)
-            if not document:
-                return {"error": "Document not found"}
-            return {
-                "document": document,
-                "chunks": chunks,
-                "total_chunks": len(chunks),
-            }
-        except Exception as e:
-            return {"error": str(e)}
-        
+                
     def get_database_stats(self) -> Dict:
         """
         Retrieve statistics about the vector store
@@ -372,7 +356,7 @@ def generate_rag_answer(query: str, top_k: int = 3, filters: Optional[Dict] = No
             "query": query,
             "answer": answer_result['answer'],
             "sources": answer_result['sources'],
-            "context_chunks": answer_result['context_chunks_used'],
+            "context_chunks": answer_result['context_chunks'],
             "confidence_score": answer_result['confidence'],
             "search_results": search_results['results'],
             "processing_time": search_results['processing_time']

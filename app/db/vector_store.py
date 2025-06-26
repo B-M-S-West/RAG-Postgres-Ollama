@@ -57,7 +57,7 @@ class VectorStore:
                     processing_time FLOAT DEFAULT 0.0,
                     metadata JSONB DEFAULT '{}',
                     created_at TIMESTAMP DEFAULT  CURRENT_TIMESTAMP,
-                    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
                         
                 -- Enhanced chunks table for better chunk management
@@ -97,7 +97,7 @@ class VectorStore:
                 CREATE OR REPLACE FUNCTION update_updated_at_column()
                 RETURNS TRIGGER AS $$
                 BEGIN
-                    NEW.update_at = CURRENT_TIMESTAMP;
+                    NEW.updated_at = CURRENT_TIMESTAMP;
                     RETURN NEW;
                 END;
                 $$ LANGUAGE plpgsql;
@@ -295,8 +295,7 @@ class VectorStore:
         cur = self.conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         
         base_query = """
-            SELECT id, filename, file_url, content, doc_type, chunking_strategy, chunk_count, processing_time, metadata, created_at, updated_at
-                SUBSTRING(content, 1, 100) AS content_preview
+            SELECT id, filename, file_url, content, doc_type, chunking_strategy, chunk_count, processing_time, metadata, created_at, updated_at, SUBSTRING(content, 1, 100) AS content_preview
             FROM documents
         """
 
