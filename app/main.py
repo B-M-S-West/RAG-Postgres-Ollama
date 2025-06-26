@@ -2,10 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.api import routes
-import os
+from app.utils.logging_setup import setup_logging
+import logging
 
 # Load environmenta variables
 load_dotenv()
+
+# Setup logging
+setup_logging()
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
@@ -20,6 +25,15 @@ app.add_middleware(
 
 app.include_router(routes.router)
 
+@app.on_event("startup")
+async def startup_event():
+    logger.info("RAG Application starting up...")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    logger.info("RAG Application shutting down...")
+
 @app.get("/")
 def read_root():
+    logger.info("Root endpoint accessed")
     return {"message": "Welcome to the FastAPI backend for the Streamlit app!"}

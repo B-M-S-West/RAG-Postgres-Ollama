@@ -7,29 +7,35 @@ from app.rag.docling_client import process_document_with_docling_from_url
 from app.rag.embedding import get_embedding
 from app.db.vector_store import VectorStore
 from app.rag.chunking import chunk_document
+from app.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 class RAGPipeline:
     def __init__(self):
         self.vector_store = VectorStore()
         self.vector_store.connect()
         self.vector_store.create_tables()
+        logger.info("RAG Pipeline initialised")
 
     def process_document(self, file_obj, filename: str, chunk_size: int = 500, chunk_overlap: int = 50) -> Dict:
         """
         Complete enhanced pipeline: upload -> process -> chunk -> embed -> store
         """
         start_time = time.time()
+        logger.info(f"Starting document processing for: {filename}")
 
         try:
             # Step 1: Upload file to MinIO
             file_url = upload_file_to_s3(file_obj, filename)
-            print(f"File uploaded to: {file_url}")
+            logger.info(f"File uploaded to: {file_url}")
             
             # Step 2: Process document with Docling
             processed_content = process_document_with_docling_from_url(file_url)
             if not processed_content:
                 raise Exception("Failed to process document with Docling")
-            
+            logger.info(f"Document processed successfully, content length: {len(processed_content)}")
+
             # Step 3: Chunk the processed content
             chunking_result = chunk_document(
                 processed_content,
@@ -41,18 +47,18 @@ class RAGPipeline:
             chunks = chunking_result['chunks']
             doc_type = chunking_result['doc_type'].value
             chunking_strategy = chunking_result['chunking_strategy'].value
-            print(f"Created {len(chunks)} chunks using {chunking_strategy} strategy")
+            logger.info(f"Created {len(chunks)} chunks using {chunking_strategy} strategy")
 
             # Step 4: Generate embeddings for each chunk
             embedded_chunks = []
             
             for i, chunk in enumerate(chunks):
-                print(f"Processing chunk {i+1}/{len(chunks)}")
+                logger.debug(f"Processing chunk {i+1}/{len(chunks)}")
 
                 # Generate embedding for the chunk
                 embedding = get_embedding(chunk['text'])
                 if not embedding:
-                    print(f"Failed to generate embedding for chunk {i+1}")
+                    logger.warning(f"Failed to generate embedding for chunk {i+1}")
                     continue
 
                 chunk['embedding'] = embedding
@@ -60,9 +66,10 @@ class RAGPipeline:
 
                 if not embedded_chunks:
                     raise Exception("No valid chunks with embeddings generated")
-                
+                logger.info(f"Successfully generated embeddings for {len(embedded_chunks)}/{len(chunks)} chunks")
+
             # Step 5: Store in database
-            print(f"Storing document and {len(embedded_chunks)} chunks in vector store")
+            logger.info(f"Storing document and {len(embedded_chunks)} chunks in vector store")
             document_id = str(uuid.uuid4())
             
             # Store document metadata
@@ -108,6 +115,7 @@ class RAGPipeline:
                     section_title=chunk.get('section_title'),
                     word_count=chunk['word_count'],
                     char_count=chunk['char_count'],
+                    chunk_index=chunk['chunk_index'],
                     priority=chunk.get('priority', 'normal'),
                     metadata=chunk.get('metadata', {})
                 )
@@ -124,11 +132,12 @@ class RAGPipeline:
                     if embedding_success:
                         stored_chunks += 1
                     else:
-                        print(f"Failed to store embedding for chunk {chunk['chunk_index']}")
+                        logger.error(f"Failed to store embedding for chunk {chunk['chunk_index']}")
                 else:
-                    print(f"Failed to store chunk {chunk['chunk_index']}")
+                    logger.error(f"Failed to store chunk {chunk['chunk_index']}")
 
-            print(f"Successfully stored {stored_chunks}/{len(embedded_chunks)} chunks with embeddings")
+            logger.info(f"Successfully stored {stored_chunks}/{len(embedded_chunks)} chunks with embeddings")
+            logger.info(f"Document processing completed in {processing_time:.2f} seconds")
 
             return {
                 "document_id": document_id,
@@ -145,7 +154,7 @@ class RAGPipeline:
         
         except Exception as e:
             processing_time = time.time() - start_time
-            print(f"Error in RAG pipeline: {e}")
+            logger.error(f"Error in RAG pipeline: {e}")
             return {
                 "status": "error",
                 "error": str(e),
@@ -161,13 +170,14 @@ class RAGPipeline:
         """
         try:
             start_time = time.time()
+            logger.info(f"Searching for documents with query: '{query}' (top_k={top_k})")
             # Step 1: Generate embedding for the query
             query_embedding = get_embedding(query)
             if not query_embedding:
                 raise Exception("Failed to generate query embedding")
             
             # Step 2: Search for similar chunks
-            print(f"Searching for top {top_k} similar chunks.")
+            logger.debug(f"Searching for top {top_k} similar chunks")
             results = self.vector_store.search(query_embedding, top_k=top_k, filters=filters)
             
             # Step 3: Format and enhance results
@@ -191,7 +201,7 @@ class RAGPipeline:
                 formatted_results.append(formatted_result)
 
             processing_time = time.time() - start_time
-            print(f"Query completed in {processing_time:.2f} seconds.")
+            logger.info(f"Query completed in {processing_time:.2f} seconds, found {len(formatted_results)} results")
 
             return {
                 "query": query,
@@ -202,7 +212,7 @@ class RAGPipeline:
             }
             
         except Exception as e:
-            print(f"Error querying documents: {e}")
+            logger.error(f"Error querying documents: {e}")
             return {
                 "query": query,
                 "results": [],
@@ -216,9 +226,12 @@ class RAGPipeline:
         Retrieve a specific document by ID
         """
         try:
+            logger.debug(f"Retrieving document by ID: {document_id}")
             document = self.vector_store.get_document_by_id(document_id)
             if not document:
+                logger.warning(f"Document not found: {document_id}")
                 return {"error": "Document not found"}
+            logger.info(f"Successfully retrieved document: {document['filename']}")
             return {
                 "document_id": document["id"],
                 "filename": document["filename"],
@@ -227,6 +240,7 @@ class RAGPipeline:
                 "metadata": document["metadata"]
             }
         except Exception as e:
+            logger.error(f"Error retrieving document {document_id}: {e}")
             return {"error": str(e)}
 
     def generate_answer(self, query: str, context_chunks: List[Dict], max_context_length: int = 4000) -> Dict:
@@ -234,6 +248,7 @@ class RAGPipeline:
         Generate an answer using retrieved context
         """
         try:
+            logger.info(f"Generating answer for query with {len(context_chunks)} context chunks")
             # Build context from chunks
             context_parts = []
             total_length = 0
@@ -248,6 +263,7 @@ class RAGPipeline:
                 total_length += len(chunk_text)
 
             context = "\n\n".join(context_parts)
+            logger.debug(f"Built context with {len(context_parts)} chunks, total length: {total_length}")
 
             # Add Ollama interation here
             # ollama_response = ollama.chat(
@@ -263,7 +279,8 @@ class RAGPipeline:
             Context used:
             {context[:1000]}{'...' if len(context) > 1000 else ''}
             """
-            
+
+            logger.info("Answer generated successfully")
             return {
                 "answer": answer,
                 "sources": list(set(chunk['filename'] for chunk in context_chunks)),
@@ -273,6 +290,7 @@ class RAGPipeline:
             }
         
         except Exception as e:
+            logger.error(f"Error generating answer: {e}")
             return {
                 "answer": f"Error generating answer: {str(e)}",
                 "sources": [],
@@ -286,8 +304,12 @@ class RAGPipeline:
         Retrieve statistics about the vector store
         """
         try:
-            return self.vector_store.get_document_stats()
+            logger.debug("Retrieving database statistics")
+            stats = self.vector_store.get_document_stats()
+            logger.info(f"Database stats retrieved: {stats.get('total_documents', 0)} documents, {stats.get('total_chunks', 0)} chunks")
+            return stats
         except Exception as e:
+            logger.error(f"Error retrieving database stats: {e}")
             return {"error": str(e)}
         
     def delete_document(self, document_id: str) -> Dict:
@@ -295,11 +317,15 @@ class RAGPipeline:
         Delete a document and its associated chunks from the vector store
         """
         try:
+            logger.info(f"Deleting document: {document_id}")
             success = self.vector_store.delete_document(document_id)
             if not success:
+                logger.warning(f"Failed to delete document: {document_id}")
                 return {"error": "Failed to delete document"}
+            logger.info(f"Successfully deleted document: {document_id}")
             return {"status": "success", "message": "Document deleted successfully"}
         except Exception as e:
+            logger.error(f"Error deleting document {document_id}: {e}")
             return {"error": str(e)}
         
     def close(self):
@@ -307,6 +333,7 @@ class RAGPipeline:
         Close the database connection
         """
         if self.vector_store:
+            logger.info("Closing RAG Pipeline connections")
             self.vector_store.disconnect()
 
 

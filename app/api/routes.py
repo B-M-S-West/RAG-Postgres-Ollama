@@ -3,7 +3,10 @@ from typing import Optional, List, Dict, Any
 from app.rag.retrieval import process_uploaded_file, search_documents, generate_rag_answer, RAGPipeline
 from app.rag.storage import get_s3_client
 from app.models import DocumentList, DocumentResponse, QueryRequest, QueryResponse, RAGResponse, DocumentType, QueryResult
+from app.utils.logger import get_logger
 import os
+
+logger = get_logger(__name__)
 
 router = APIRouter()
 
@@ -12,6 +15,7 @@ async def health_check():
     """
     Health check endpoint to verify the service is running.
     """
+    logger.info("Health check endpoint accessed")
     return {"status": "ok", "service": "RAG API"}
 
 @router.get("/stats")
@@ -19,11 +23,14 @@ async def get_database_stats():
     """
     Get statistics about the database, such as number of documents, total size, etc.
     """
+    logger.info("Database stats requested")
     pipeline = RAGPipeline()
     try:
         stats = pipeline.get_database_stats()
+        logger.info(f"Database stats retrieved: {stats}")
         return {"stats": stats}
     except Exception as e:
+        logger.error(f"Error getting database stats: {e}")
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         pipeline.close()
@@ -37,20 +44,24 @@ async def process_file(
     """
     Process a document through the RAG pipeline.
     """
+    logger.info(f"File upload received: {file.filename}")
     try:
         #Validate file type
         allowed_extensions = ['.pdf', '.docx', '.txt', '.html', '.pptx']
         file_extension = os.path.splitext(file.filename)[1].lower()
 
         if file.filename is None:
+            logger.warning("Uploaded file has no filename")
             raise HTTPException(status_code=400, detail="Uploaded file has no filename")
         
         if file_extension not in allowed_extensions:
+            logger.warning(f"Unsupported file type: {file_extension}")
             raise HTTPException(
                 status_code=400,
                 detail=f"Unsupported file type: {file_extension}. Allowed: {allowed_extensions}"
             )
-        
+        logger.info(f"Processing {file.filename} with chunk_size={chunk_size}, chunk_overlap={chunk_overlap}")
+
         result = process_uploaded_file(
             file.file,
             file.filename,
@@ -59,7 +70,9 @@ async def process_file(
             )
         
         if result.get("status") == "error":
+            logger.error(f"Processing failed for {file.filename}: {result['error']}")
             raise HTTPException(status_code=500, detail=result["error"])
+        logger.info(f"Successfully processed {file.filename}")
         return {
             **result,
             "message": "File processed successfully",
@@ -74,6 +87,7 @@ async def process_file(
     except HTTPException:
         raise
     except Exception as e:
+        logger.error(f"Unexpected error processing {file.filename}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.post("/query/advanced",response_model=QueryResponse)
@@ -81,6 +95,7 @@ async def query_documents_endpoints(request: QueryRequest):
     """
     Query documents with advanced filtering
     """
+    logger.info(f"Advanced query received: '{request.query}'")
     try:
         # Convert filters
         filters = {}
@@ -97,7 +112,10 @@ async def query_documents_endpoints(request: QueryRequest):
         )
 
         if results.get('error'):
+            logger.error(f"Query failed: {results['error']}")
             raise HTTPException(status_code=500,detail=results['error'])
+        
+        logger.info(f"Query completed successfully, found {results['total_results']} results")
         
         return QueryResponse(
             query=results['query'],
@@ -121,6 +139,7 @@ async def query_documents_endpoints(request: QueryRequest):
     except HTTPException:
         raise
     except Exception as e:
+        logger.error(f"Unexpected error in advanced query: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.get("/query")
@@ -134,6 +153,7 @@ async def query_documents_simple(
     """
     Simple query endpoint for backward compatibility
     """
+    logger.info(f"Simple query received: '{q}'")
     try:
         filters = {}
         if doc_type:
@@ -146,8 +166,11 @@ async def query_documents_simple(
         results = search_documents(q, top_k, filters if filters else None)
         
         if results.get('error'):
+            logger.error(f"Simple query failed: {results['error']}")
             raise HTTPException(status_code=500, detail=results['error'])
         
+        logger.info(f"Simple query completed, found {results['total_results']} results")
+
         return {
             "query": q,
             "results": results['results'],
@@ -157,6 +180,7 @@ async def query_documents_simple(
         }
         
     except Exception as e:
+        logger.error(f"Error in simple query: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.post("/rag", response_model=RAGResponse)
@@ -169,6 +193,7 @@ async def generate_answer(
     """
     Complete RAG endpoint: retrieve and generate answer
     """
+    logger.info(f"RAG request received: '{query}'")
     try:
         # Prepare filters
         search_filters = filters or {}
@@ -178,7 +203,10 @@ async def generate_answer(
         result = generate_rag_answer(query, top_k, search_filters if search_filters else None)
         
         if result.get('error'):
+            logger.error(f"RAG generation failed: {result['error']}")
             raise HTTPException(status_code=500, detail=result['error'])
+        
+        logger.info("RAG answer generated successfully")
         
         return RAGResponse(
             answer=result['answer'],
@@ -191,6 +219,7 @@ async def generate_answer(
     except HTTPException:
         raise
     except Exception as e:
+        logger.error(f"Unexpected error in RAG generation: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.get("/documents/{document_id}")
@@ -240,11 +269,13 @@ async def delete_document(document_id: str):
     """
     Delete a document and all its chunks/embeddings
     """
+    logger.info(f"Delete request for document: {document_id}")
     pipeline = RAGPipeline()
     try:
         # Get document info first
         doc = pipeline.vector_store.get_document_by_id(document_id)
         if not doc:
+            logger.warning(f"Document not found for deletion: {document_id}")
             raise HTTPException(status_code=404, detail="Document not found")
         # Delete from S3/MinIO first
         try:
@@ -252,17 +283,20 @@ async def delete_document(document_id: str):
             bucket = os.getenv("MINIO_BUCKET")
             filename = doc["filename"]
             s3.delete_object(Bucket=bucket, Key=filename)
+            logger.info(f"File deleted from storage: {filename}")
         except Exception as e:
-            print(f"Warning: Could not delete file from storage: {e}")
+            logger.warning(f"Could not delete file from storage: {e}")
             
             # Then delete from database
             success = pipeline.vector_store.delete_document(document_id)
             if success:
+                logger.info(f"Document deleted successfully: {doc['filename']}")
                 return {
                     "status": "success",
                     "message": f"Document {doc['filename']} deleted successfully"
                     }
             else:
+                logger.error(f"Failed to delete document from database: {document_id}")
                 raise HTTPException(status_code=404, detail="Failed to delete document from database")
     finally:
         pipeline.close()
@@ -272,6 +306,7 @@ async def get_document_chunks(document_id: str):
     """
     Get all chunks for a specific document
     """
+    logger.info(f"Request for document chunks: {document_id}")
     pipeline = RAGPipeline()
     try:
         chunks = pipeline.vector_store.get_document_chunks(document_id)
@@ -291,11 +326,13 @@ async def find_similar_documents(
     """
     Find documents similar to a given document
     """
+    logger.info(f"Find similar documents to: {document_id}")
     pipeline = RAGPipeline()
     try:
         # Get the document
         doc = pipeline.vector_store.get_document_by_id(document_id)
         if not doc:
+            logger.error(f"Document not found: {document_id}")
             raise HTTPException(status_code=404, detail="Document not found")
         
         # Use document content as query

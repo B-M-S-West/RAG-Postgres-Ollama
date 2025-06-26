@@ -6,8 +6,10 @@ import os
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 from dotenv import load_dotenv
+from app.utils.logger import get_logger
 
 load_dotenv()
+logger = get_logger('vector_store')
 
 class VectorStore:
     def __init__(self):
@@ -28,18 +30,20 @@ class VectorStore:
                 password=self.password
             )
             self.conn.autocommit = True
+            logger.info(f"Connected to PostgreSQL database: {self.db}")
             return self.conn
         except psycopg2.Error as e:
-            print(f"Error connecting to PostgreSQL: {e}")
+            logger.error(f"Error connecting to PostgreSQL: {e}")
             return None
         
     def disconnect(self):
         if self.conn:
             self.conn.close()
+            logger.info("Disconnected from PostgreSQL")
 
     def create_tables(self):
         if not self.conn:
-            print("Connection not established.")
+            logger.error("Connection not established - cannot create tables")
             return
         
         cur = self.conn.cursor()
@@ -109,14 +113,14 @@ class VectorStore:
                     EXECUTE FUNCTION update_updated_at_column();
             """)
             self.conn.commit()
-            print("Enhanced tables created successfully.")
+            logger.info("Database tables created successfully")
         except psycopg2.Error as e:
-            print(f"Error creating tables: {e}")
+            logger.error(f"Error creating tables: {e}")
 
     def insert_document(self, document_id: str, filename: str, file_url: str, content: str, doc_type: str, chunking_strategy: str, chunk_count: int, processing_time: float, metadata: Dict):
         # Insert document with enhanced metadata
         if not self.conn:
-            print("Connection not established.")
+            logger.error("Connection not established - cannot insert document")
             return False
         
         cur = self.conn.cursor()
@@ -126,15 +130,16 @@ class VectorStore:
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (document_id, filename, file_url, content, doc_type, chunking_strategy, chunk_count, processing_time, json.dumps(metadata)))
             self.conn.commit()
-            print(f"Document {filename} inserted successfully.")
+            logger.info(f"Document '{filename}' inserted successfully")
+            return True
         except psycopg2.Error as e:
-            print(f"Error inserting document: {e}")
+            logger.error(f"Error inserting document '{filename}': {e}")
             return False
         
     def insert_chunk(self, chunk_id: str, document_id: str, chunk_index: int, text: str, chunk_type: str, section_title: Optional[str], word_count: int, char_count: int, priority: str, metadata: Dict):
         # Insert chunk with enhanced metadata
         if not self.conn:
-            print("Connection not established.")
+            logger.error("Connection not established - cannot insert chunk")
             return False
         
         cur = self.conn.cursor()
@@ -144,16 +149,16 @@ class VectorStore:
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (chunk_id, document_id, chunk_index, text, chunk_type, section_title, word_count, char_count, priority, json.dumps(metadata)))
             self.conn.commit()
-            print(f"Chunk {chunk_index} for document {document_id} inserted successfully.")
+            logger.debug(f"Chunk {chunk_index} inserted successfully")
             return True
         except psycopg2.Error as e:
-            print(f"Error inserting chunk: {e}")
+            logger.error(f"Error inserting chunk {chunk_index}: {e}")
             return False
         
     def insert_chunk_embedding(self, embedding_id: str, chunk_id: str, document_id: str, embedding: List[float], embedding_model: str = 'nomic-embed-text'):
         # Insert chunk embedding with enhanced metadata
         if not self.conn:
-            print("Connection not established.")
+            logger.error("Connection not established - cannot insert embedding")
             return False
         
         cur = self.conn.cursor()
@@ -169,16 +174,16 @@ class VectorStore:
                 VALUES (%s, %s, %s, %s::vector, %s)
             """, (embedding_id, chunk_id, document_id, embedding, embedding_model))
             self.conn.commit()
-            print(f"Embedding for chunk {chunk_id} inserted successfully.")
+            logger.debug(f"Embedding for chunk {chunk_id} inserted successfully")
             return True
         except psycopg2.Error as e:
-            print(f"Error inserting chunk embedding: {e}")
+            logger.error(f"Error inserting embedding for chunk {chunk_id}: {e}")
             return False
         
     def search(self, query_embedding: List[float], top_k: int = 3, filters: Optional[Dict] = None) -> List[Dict]:
         # Enhanced search with optional filters
         if not self.conn:
-            print("Connection not established.")
+            logger.error("Connection not established - cannot search")
             return []
         
         # Ensure embedding is a flat 1-D list
@@ -239,9 +244,10 @@ class VectorStore:
         try:
             cur.execute(base_query, params)
             results = cur.fetchall()
+            logger.debug(f"Search completed, found {len(results)} results")
             return [dict(result) for result in results]
         except psycopg2.Error as e:
-            print(f"Error searching embeddings: {e}")
+            logger.error(f"Error searching embeddings: {e}")
             return []
         
     def get_document_by_id(self, document_id: str) -> Optional[Dict]:
@@ -249,6 +255,7 @@ class VectorStore:
         Retrieve a document by ID from the database.
         """
         if not self.conn:
+            logger.error("Connection not established - cannot get document")
             return None
         
         cur = self.conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -261,7 +268,7 @@ class VectorStore:
             result = cur.fetchone()
             return dict(result) if result else None
         except psycopg2.Error as e:
-            print(f"Error retrieving document: {e}")
+            logger.error(f"Error retrieving document {document_id}: {e}")
             return None
 
     def get_document_chunks(self, document_id: str) -> List[Dict]:
@@ -269,6 +276,7 @@ class VectorStore:
         Retrieve all chunks for a specific document by its ID.
         """
         if not self.conn:
+            logger.error("Connection not established - cannot get chunks")
             return []
         
         cur = self.conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -280,9 +288,10 @@ class VectorStore:
                 ORDER BY chunk_index;
             """, (document_id,))
             results = cur.fetchall()
+            logger.debug(f"Retrieved {len(results)} chunks for document {document_id}")
             return [dict(result) for result in results]
         except psycopg2.Error as e:
-            print(f"Error retrieving document chunks: {e}")
+            logger.error(f"Error retrieving document chunks: {e}")
             return []
         
     def list_documents(self, limit: int = 100, offset: int = 0, doc_type: Optional[str] = None) -> List[Dict]:
@@ -290,6 +299,7 @@ class VectorStore:
         Get all documents with pagination and filtering
         """
         if not self.conn:
+            logger.error("Connection not established - cannot list documents")
             return []
         
         cur = self.conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -320,6 +330,7 @@ class VectorStore:
         Delete a document and its associated chunks and embeddings by ID.
         """
         if not self.conn:
+            logger.error("Connection not established - cannot delete document")
             return False
         
         cur = self.conn.cursor()
@@ -327,9 +338,14 @@ class VectorStore:
             # CASCADE will cause the deletion of associated chunks and embeddings
             cur.execute("DELETE FROM documents WHERE id = %s", (document_id,))
             self.conn.commit()
-            return cur.rowcount > 0
+            deleted = cur.rowcount > 0
+            if deleted:
+                logger.info(f"Document {document_id} deleted successfully")
+            else:
+                logger.warning(f"No document found with ID {document_id}")
+            return deleted
         except psycopg2.Error as e:
-            print(f"Error deleting document: {e}")
+            logger.error(f"Error deleting document {document_id}: {e}")
             self.conn.rollback()
             return False
         
@@ -338,6 +354,7 @@ class VectorStore:
         Get statistics about the documents in the database.
         """
         if not self.conn:
+            logger.error("Connection not established - cannot get stats")
             return {}
         
         cur = self.conn.cursor()
@@ -367,9 +384,10 @@ class VectorStore:
             result = cur.fetchone()
             stats['avg_processing_time'] = float(result[0]) if result[0] else 0.0
 
+            logger.debug("Database statistics retrieved successfully")
             return stats
         except psycopg2.Error as e:
-            print(f"Error retrieving document stats: {e}")
+            logger.error(f"Error retrieving document stats: {e}")
             return {}
         
     def execute_query(self, query: str, params=None):
@@ -377,7 +395,7 @@ class VectorStore:
         Execute a custom SQL query.
         """
         if not self.conn:
-            print("Connection not established.")
+            logger.error("Connection not established - cannot execute query")
             return None
         
         cur = self.conn.cursor()
@@ -389,7 +407,7 @@ class VectorStore:
             else:
                 return None
         except psycopg2.Error as e:
-            print(f"Error executing query: {e}")
+            logger.error(f"Error executing query: {e}")
             return None
         
 
@@ -398,5 +416,5 @@ if __name__ == "__main__":
     if vector_store.connect():
         vector_store.create_tables()
         stats = vector_store.get_document_stats()
-        print("Document Stats:", stats)
+        logger.info(f"Document Stats: {stats}")
         vector_store.disconnect()
