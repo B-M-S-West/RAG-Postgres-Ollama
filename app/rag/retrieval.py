@@ -103,9 +103,8 @@ class RAGPipeline:
                 chunk_success = self.vector_store.insert_chunk(
                     chunk_id=chunk_id,
                     document_id=document_id,
-                    chunk_index=chunk['chunk_index'],
                     text=chunk['text'],
-                    chunk_type=chunk['chunk_index'],
+                    chunk_type=chunk['chunk_type'],
                     section_title=chunk.get('section_title'),
                     word_count=chunk['word_count'],
                     char_count=chunk['char_count'],
@@ -174,7 +173,7 @@ class RAGPipeline:
             # Step 3: Format and enhance results
             formatted_results = []
             for result in results:
-                formatted_results = {
+                formatted_result = {
                     "document_id": result["document_id"],
                     "chunk_id": result["chunk_id"],
                     "filename": result["filename"],
@@ -189,7 +188,7 @@ class RAGPipeline:
                     "chunk_metadata": result.get("metadata", {}),
                     "document_metadata": result.get("document_metadata", {})
                 }
-                formatted_results.append(formatted_results)
+                formatted_results.append(formatted_result)
 
             processing_time = time.time() - start_time
             print(f"Query completed in {processing_time:.2f} seconds.")
@@ -270,7 +269,7 @@ class RAGPipeline:
                 "sources": list(set(chunk['filename'] for chunk in context_chunks)),
                 "context_chunks_used": len(context_parts),
                 "total_context_length": total_length,
-                "confindence": 0.8,  # Placeholder
+                "confidence": 0.8,  # Placeholder
             }
         
         except Exception as e:
@@ -330,7 +329,7 @@ class RAGPipeline:
 # Convenience functions for use in API endpoints
 def process_uploaded_file(file_obj, filename: str, chunk_size: int = 500, chunk_overlap: int = 50) -> Dict[str, Any]:
     """
-    Prcess a single uploaded file through the RAG pipeline
+    Process a single uploaded file through the RAG pipeline
     """
     pipeline = RAGPipeline()
     try:

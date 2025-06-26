@@ -1,8 +1,8 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Body
 from typing import Optional, List, Dict, Any
-from app.rag.retrieval import process_uploaded_file, search_documents, generate_rag_answer, RAGPipeline
-from app.rag.storage import get_s3_client
-from app.models import DocumentList, DocumentResponse, QueryRequest, QueryResponse, RAGResponse, DocumentType, QueryResult
+from rag.retrieval import process_uploaded_file, search_documents, generate_rag_answer, RAGPipeline
+from rag.storage import get_s3_client
+from models import DocumentList, DocumentResponse, QueryRequest, QueryResponse, RAGResponse, DocumentType, QueryResult
 import os
 
 router = APIRouter()
@@ -60,7 +60,8 @@ async def process_file(
         
         if result.get("status") == "error":
             raise HTTPException(status_code=500, detail=result["error"])
-        return result {
+        return {
+            **result,
             "message": "File processed successfully",
             "document_id": result.get("document_id"),
             "filename": result["filename"],
