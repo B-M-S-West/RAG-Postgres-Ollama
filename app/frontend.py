@@ -40,12 +40,6 @@ def main():
 
 def upload_page():
     st.header("📤 Upload Documents")
-
-
-
-
-ddef upload_page():
-    st.header("📤 Upload Documents")
     
     col1, col2 = st.columns([2, 1])
     
@@ -105,7 +99,7 @@ def process_document(uploaded_file, chunk_size: int, chunk_overlap: int):
             params = {"chunk_size": chunk_size, "chunk_overlap": chunk_overlap}
             
             response = requests.post(
-                f"{API_BASE_URL}/process",
+                f"{BACKEND_URL}/process",
                 files=files,
                 params=params,
                 timeout=300  # 5 minute timeout
@@ -194,7 +188,7 @@ def perform_rag_search(query: str, doc_type_filter: str, top_k: int):
             if doc_type_filter != "All":
                 payload["doc_types"] = [doc_type_filter]
             
-            response = requests.post(f"{API_BASE_URL}/rag", json=payload)
+            response = requests.post(f"{BACKEND_URL}/rag", json=payload)
             
             if response.status_code == 200:
                 result = response.json()
@@ -235,7 +229,7 @@ def perform_document_search(query: str, doc_type_filter: str, chunk_type_filter:
             if chunk_type_filter != "All":
                 params["chunk_type"] = chunk_type_filter
             
-            response = requests.get(f"{API_BASE_URL}/query", params=params)
+            response = requests.get(f"{BACKEND_URL}/query", params=params)
             
             if response.status_code == 200:
                 result = response.json()
@@ -273,7 +267,7 @@ def analytics_page():
     
     # Get database stats
     try:
-        response = requests.get(f"{API_BASE_URL}/stats")
+        response = requests.get(f"{BACKEND_URL}/stats")
         if response.status_code == 200:
             stats = response.json()['stats']
             
@@ -302,12 +296,12 @@ def analytics_page():
                 
                 with col1:
                     fig = px.pie(df, values='Count', names='Document Type', 
-                               title="Document Distribution by Type")
+                                title="Document Distribution by Type")
                     st.plotly_chart(fig, use_container_width=True)
                 
                 with col2:
                     fig = px.bar(df, x='Document Type', y='Count',
-                               title="Document Count by Type")
+                                title="Document Count by Type")
                     st.plotly_chart(fig, use_container_width=True)
             
         else:
@@ -339,7 +333,7 @@ def library_page():
         if doc_type_filter != "All":
             params["doc_type"] = doc_type_filter
         
-        response = requests.get(f"{API_BASE_URL}/documents", params=params)
+        response = requests.get(f"{BACKEND_URL}/documents", params=params)
         
         if response.status_code == 200:
             result = response.json()
@@ -380,7 +374,7 @@ def delete_document(document_id: str, filename: str):
     """Delete a document"""
     if st.confirm(f"Are you sure you want to delete '{filename}'?"):
         try:
-            response = requests.delete(f"{API_BASE_URL}/documents/{document_id}")
+            response = requests.delete(f"{BACKEND_URL}/documents/{document_id}")
             if response.status_code == 200:
                 st.success(f"✅ Deleted '{filename}' successfully!")
                 st.rerun()
@@ -392,7 +386,7 @@ def delete_document(document_id: str, filename: str):
 def find_similar_documents(document_id: str):
     """Find similar documents"""
     try:
-        response = requests.get(f"{API_BASE_URL}/search/similar/{document_id}")
+        response = requests.get(f"{BACKEND_URL}/search/similar/{document_id}")
         if response.status_code == 200:
             result = response.json()
             
@@ -414,7 +408,7 @@ def status_page():
     
     # API Health Check
     try:
-        response = requests.get(f"{API_BASE_URL}/health", timeout=5)
+        response = requests.get(f"{BACKEND_URL}/health", timeout=5)
         if response.status_code == 200:
             st.success("✅ API Server: Online")
         else:
@@ -424,7 +418,7 @@ def status_page():
     
     # Database Stats
     try:
-        response = requests.get(f"{API_BASE_URL}/stats")
+        response = requests.get(f"{BACKEND_URL}/stats")
         if response.status_code == 200:
             st.success("✅ Database: Connected")
             stats = response.json()['stats']
@@ -439,7 +433,7 @@ def status_page():
     # System Information
     st.subheader("🖥️ System Information")
     st.info(f"""
-    **API Base URL:** {API_BASE_URL}
+    **Backend URL:** {BACKEND_URL}
     **Frontend:** Streamlit
     **Backend:** FastAPI
     **Database:** PostgreSQL with pgvector
@@ -450,7 +444,7 @@ def status_page():
 def show_recent_uploads():
     """Show recent uploads in sidebar"""
     try:
-        response = requests.get(f"{API_BASE_URL}/documents", params={"limit": 5})
+        response = requests.get(f"{BACKEND_URL}/documents", params={"limit": 5})
         if response.status_code == 200:
             documents = response.json()['documents']
             if documents:
