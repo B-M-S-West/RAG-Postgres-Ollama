@@ -1,6 +1,8 @@
 import os
 import uuid
 import time
+import requests
+import json
 from typing import List, Dict, Any, Optional
 from app.rag.storage import upload_file_to_s3
 from app.rag.docling_client import process_document_with_docling_from_url
@@ -18,6 +20,11 @@ class RAGPipeline:
         self.vector_store = VectorStore()
         self.vector_store.connect()
         self.vector_store.create_tables()
+
+        # Ollama configuration
+        self.ollama_base_url = "http://localhost:11434"
+        self.ollama_timeout = 300
+
         logger.info("RAG Pipeline initialised")
 
     def process_document(self, file_obj, filename: str, chunk_size: int = 500, chunk_overlap: int = 50) -> Dict:
@@ -245,15 +252,16 @@ class RAGPipeline:
             logger.error(f"Error retrieving document {document_id}: {e}")
             return {"error": str(e)}
 
-    def generate_answer(self, query: str, context_chunks: List[Dict], max_context_length: int = 4000) -> Dict:
+    def generate_answer(self, query: str, context_chunks: List[Dict], max_context_length: int = 4000, model: str = "gemma3:1b-it-qat") -> Dict:
         """
-        Generate an answer using retrieved context
+        Generate an answer using retrieved context with Ollama via requests
         """
         try:
-            logger.info(f"Generating answer for query with {len(context_chunks)} context chunks")
+            logger.info(f"Generating answer for query with {len(context_chunks)} context chunks using model: {model}")
             # Build context from chunks
             context_parts = []
             total_length = 0
+            sources = []
 
             for i, chunk in enumerate(context_chunks):
                 chunk_text = chunk['content']
@@ -261,45 +269,62 @@ class RAGPipeline:
 
                 if total_length + len(chunk_text) > max_context_length: break
 
-                context_parts.append(chunk_text)
+                context_parts.append(f"{source_info}\n{chunk_text}")
+                sources.append(chunk['filename'])
                 total_length += len(chunk_text)
 
             context = "\n\n".join(context_parts)
             logger.debug(f"Built context with {len(context_parts)} chunks, total length: {total_length}")
 
-            # Add Ollama interation here
-            # ollama_response = ollama.chat(
+            # Create messages for Ollama
+            system_message = {
+                "role": "system",
+                "content": "You are a helpful assistant that answers questions based on provided context. Always cite your sources when possible and be concise but comprehensive"
+            }
 
-            answer = f"""based on the provided context, here's what I found regarding your query: "{query}"
+            user_prompt = f"""Based on the following context, please answer the user's question. If the answer cannot be found in the context, say so clearly.
 
-            Context Summary:
-            - Found {len(context_chunks)} relevant chunks.
-            - Sources: {', '.join([chunk['filename'] for chunk in context_chunks])}
-            - Document types: {', '.join(set(chunk['doc_type'] for chunk in context_chunks))}
-            [Placeholder response before Ollama integration]
+            Context:
+            {context}
 
-            Context used:
-            {context[:1000]}{'...' if len(context) > 1000 else ''}
+            Question: {query}
+
+            Please provide a comprehensive answer based on the context provided above.
             """
 
-            logger.info("Answer generated successfully")
+            user_message = {
+                "role": "user",
+                "content": user_prompt
+            }
+
+            # Call ollama
+            answer = self._call_ollama(
+                messages=[system_message, user_message],
+                model=model,
+                temperature=0.7,
+                max_tokens=1000
+            )
+
+            logger.info("Answer generated successfully with Ollama")
             return {
                 "answer": answer,
-                "sources": list(set(chunk['filename'] for chunk in context_chunks)),
+                "sources": list(set(sources)),
                 "context_chunks": len(context_parts),
                 "total_context_length": total_length,
-                "confidence": 0.8,  # Placeholder
+                "model_used": model,
+                "confidence": 0.8,  # You might want to implement actual confidence scoring
             }
-        
+            
         except Exception as e:
-            logger.error(f"Error generating answer: {e}")
+            logger.error(f"Error generating answer with Ollama: {e}")
             return {
                 "answer": f"Error generating answer: {str(e)}",
                 "sources": [],
                 "context_chunks": 0,
                 "total_context_length": 0,
+                "model_used": model,
                 "confidence": 0.0,
-            }
+        }
                 
     def get_database_stats(self) -> Dict:
         """
@@ -329,6 +354,60 @@ class RAGPipeline:
         except Exception as e:
             logger.error(f"Error deleting document {document_id}: {e}")
             return {"error": str(e)}
+        
+    def _call_ollama(self, messages: List[Dict], model: str = "gemma3:1b-it-qat", temperature: float = 0.7, max_tokens: int = 1000) -> str:
+        """
+        make a request to Ollama's OpenAI-compatible chat endpoint
+        """
+
+        url =f"{self.ollama_base_url}/v1/chat/completions"
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": "bearer ollama"
+        }
+
+        payload = {
+            "model": model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "stream": False
+        }
+
+        try:
+            logger.debug(f"Calling Ollama API with model: {model}")
+            response = requests.post(
+                url, 
+                headers=headers, 
+                json=payload, 
+                timeout=self.ollama_timeout
+            )
+            
+            # Check if request was successful
+            response.raise_for_status()
+            
+            # Parse response
+            response_data = response.json()
+            
+            if "choices" not in response_data or len(response_data["choices"]) == 0:
+                raise Exception("No response choices returned from Ollama")
+                
+            answer = response_data["choices"][0]["message"]["content"]
+            logger.debug(f"Ollama response received, length: {len(answer)}")
+            
+            return answer
+            
+        except requests.exceptions.Timeout:
+            raise Exception(f"Ollama request timed out after {self.ollama_timeout} seconds")
+        except requests.exceptions.ConnectionError:
+            raise Exception("Could not connect to Ollama. Make sure Ollama is running on localhost:11434")
+        except requests.exceptions.HTTPError as e:
+            raise Exception(f"Ollama API error: {e.response.status_code} - {e.response.text}")
+        except json.JSONDecodeError:
+            raise Exception("Invalid JSON response from Ollama")
+        except Exception as e:
+            raise Exception(f"Ollama API call failed: {str(e)}")
         
     def close(self):
         """
@@ -362,9 +441,9 @@ def search_documents(query: str, top_k: int = 3, filters: Optional[Dict] = None)
     finally:
         pipeline.close()
 
-def generate_rag_answer(query: str, top_k: int = 3, filters: Optional[Dict] = None) -> Dict[str, Any]:
+def generate_rag_answer(query: str, top_k: int = 3, filters: Optional[Dict] = None, model: str = "gemma3:1b-it-qat") -> Dict[str, Any]:
     """
-    Generate an answer using RAG with context retrieval
+    Generate an answer using RAG with context retrieval and Ollama
     """
     pipeline = RAGPipeline()
     try:
@@ -377,7 +456,8 @@ def generate_rag_answer(query: str, top_k: int = 3, filters: Optional[Dict] = No
         # Generate answer using the retrieved context
         answer_result = pipeline.generate_answer(
             query,
-            search_results['results']
+            search_results['results'],
+            model=model
         )
 
         # Combine results
@@ -386,6 +466,7 @@ def generate_rag_answer(query: str, top_k: int = 3, filters: Optional[Dict] = No
             "answer": answer_result['answer'],
             "sources": answer_result['sources'],
             "context_chunks": answer_result['context_chunks'],
+            "model_used": answer_result['model_used'],
             "confidence_score": answer_result['confidence'],
             "search_results": search_results['results'],
             "processing_time": search_results['processing_time']

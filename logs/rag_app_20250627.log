@@ -1,0 +1,115 @@
+2025-06-27 20:37:31,613 - uvicorn.error - INFO - Will watch for changes in these directories: ['/home/ben-west/coding/RAG-Postgres-Ollama']
+2025-06-27 20:37:31,615 - uvicorn.error - INFO - Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
+2025-06-27 20:37:31,616 - uvicorn.error - INFO - Started reloader process [692879] using WatchFiles
+2025-06-27 20:37:32,903 - uvicorn.error - INFO - Started server process [692905]
+2025-06-27 20:37:32,904 - uvicorn.error - INFO - Waiting for application startup.
+2025-06-27 20:37:32,905 - app.main - INFO - RAG Application starting up...
+2025-06-27 20:37:32,905 - uvicorn.error - INFO - Application startup complete.
+2025-06-27 20:38:06,584 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:38:06,600 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:38:06,601 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:38:06,604 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:38:06,604 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:38:22,432 - app.api.routes - INFO - Database stats requested
+2025-06-27 20:38:22,443 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:38:22,459 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:38:22,460 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:38:22,466 - app.rag.retrieval - INFO - Database stats retrieved: 0 documents, 0 chunks
+2025-06-27 20:38:22,466 - app.api.routes - INFO - Database stats retrieved: {'documents_by_type': {}, 'total_documents': 0, 'total_chunks': 0, 'total_embeddings': 0, 'avg_processing_time': 0.0}
+2025-06-27 20:38:22,466 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:38:22,467 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:38:27,710 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:38:27,726 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:38:27,726 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:38:27,730 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:38:27,730 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:38:30,453 - app.api.routes - INFO - Health check endpoint accessed
+2025-06-27 20:38:30,458 - app.api.routes - INFO - Database stats requested
+2025-06-27 20:38:30,468 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:38:30,478 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:38:30,478 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:38:30,484 - app.rag.retrieval - INFO - Database stats retrieved: 0 documents, 0 chunks
+2025-06-27 20:38:30,484 - app.api.routes - INFO - Database stats retrieved: {'documents_by_type': {}, 'total_documents': 0, 'total_chunks': 0, 'total_embeddings': 0, 'avg_processing_time': 0.0}
+2025-06-27 20:38:30,484 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:38:30,484 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:38:33,939 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:38:33,955 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:38:33,956 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:38:33,959 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:38:33,959 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:39:34,312 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:39:34,328 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:39:34,328 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:39:34,332 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:39:34,332 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:39:37,115 - app.api.routes - INFO - File upload received: Key Info.docx
+2025-06-27 20:39:37,115 - app.api.routes - INFO - Processing Key Info.docx with chunk_size=500, chunk_overlap=50
+2025-06-27 20:39:37,125 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:39:37,141 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:39:37,141 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:39:37,142 - app.rag.retrieval - INFO - Starting document processing for: Key Info.docx
+2025-06-27 20:39:37,283 - app.rag.retrieval - INFO - File uploaded to: http://minio:9000/rag/Key Info.docx
+2025-06-27 20:39:37,284 - app.rag.docling_client - INFO - Starting Docling processing for: http://minio:9000/rag/Key Info.docx
+2025-06-27 20:39:37,290 - app.rag.docling_client - INFO - Task created with ID: 9a084f6d-e073-4f96-9b9f-b793c8f1fab1
+2025-06-27 20:39:40,304 - app.rag.docling_client - INFO - Docling task completed successfully
+2025-06-27 20:39:40,308 - app.rag.docling_client - INFO - Retrieved markdown content from Docling
+2025-06-27 20:39:40,309 - app.rag.retrieval - INFO - Document processed successfully, content length: 1023
+2025-06-27 20:39:40,309 - app.rag.retrieval - INFO - Created 1 chunks using fixed_size strategy
+2025-06-27 20:39:41,438 - app.rag.retrieval - INFO - Successfully generated embeddings for 1/1 chunks
+2025-06-27 20:39:41,438 - app.rag.retrieval - INFO - Storing document and 1 chunks in vector store
+2025-06-27 20:39:41,450 - app.db.vector_store - INFO - Document 'Key Info.docx' inserted successfully
+2025-06-27 20:39:41,462 - app.rag.retrieval - INFO - Successfully stored 1/1 chunks with embeddings
+2025-06-27 20:39:41,463 - app.rag.retrieval - INFO - Document processing completed in 4.30 seconds
+2025-06-27 20:39:41,463 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:39:41,463 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:39:41,463 - app.api.routes - INFO - Successfully processed Key Info.docx
+2025-06-27 20:39:41,481 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:39:41,488 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:39:41,488 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:39:41,491 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:39:41,491 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:39:55,248 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:39:55,264 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:39:55,264 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:39:55,268 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:39:55,268 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:40:13,382 - app.api.routes - INFO - RAG request received: 'Who is Ben?'
+2025-06-27 20:40:13,392 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:40:13,408 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:40:13,408 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:40:13,408 - app.rag.retrieval - INFO - Searching for documents with query: 'Who is Ben?' (top_k=5)
+2025-06-27 20:40:13,460 - app.rag.retrieval - INFO - Query completed in 0.05 seconds, found 1 results
+2025-06-27 20:40:13,460 - app.rag.retrieval - INFO - Generating answer for query with 1 context chunks
+2025-06-27 20:40:13,460 - app.rag.retrieval - INFO - Answer generated successfully
+2025-06-27 20:40:13,460 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:40:13,461 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:40:13,461 - app.api.routes - INFO - RAG answer generated successfully
+2025-06-27 20:40:28,534 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:40:28,550 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:40:28,550 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:40:28,554 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:40:28,554 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:40:51,366 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:40:51,382 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:40:51,382 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:40:51,386 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:40:51,387 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:41:54,644 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:41:54,659 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:41:54,660 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:41:54,663 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:41:54,663 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:41:54,674 - app.api.routes - INFO - Delete request for document: c3930994-eaee-45ff-a3c0-4b9ccaea22e4
+2025-06-27 20:41:54,684 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:41:54,690 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:41:54,691 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:41:54,708 - app.api.routes - INFO - File deleted from storage: Key Info.docx
+2025-06-27 20:41:54,711 - app.db.vector_store - INFO - Document c3930994-eaee-45ff-a3c0-4b9ccaea22e4 deleted successfully
+2025-06-27 20:41:54,711 - app.api.routes - INFO - Document deleted successfully: Key Info.docx
+2025-06-27 20:41:54,711 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:41:54,711 - app.db.vector_store - INFO - Disconnected from PostgreSQL
+2025-06-27 20:41:54,790 - app.db.vector_store - INFO - Connected to PostgreSQL database: paradedb
+2025-06-27 20:41:54,797 - app.db.vector_store - INFO - Database tables created successfully
+2025-06-27 20:41:54,797 - app.rag.retrieval - INFO - RAG Pipeline initialised
+2025-06-27 20:41:54,800 - app.rag.retrieval - INFO - Closing RAG Pipeline connections
+2025-06-27 20:41:54,800 - app.db.vector_store - INFO - Disconnected from PostgreSQL
