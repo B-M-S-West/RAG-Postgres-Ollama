@@ -1,0 +1,152 @@
+services:
+  # RAG Application Service
+  rag-app:
+    image: rag-app
+    container_name: rag-application
+    ports:
+      - "8001:8001"
+    environment:
+      # Database configuration
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=ragdb
+      - POSTGRES_USER=raguser
+      - POSTGRES_PASSWORD=ragpassword
+      - DATABASE_URL=postgresql://raguser:ragpassword@postgres:5432/ragdb
+      
+      # MinIO configuration
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin123
+      - MINIO_BUCKET_NAME=rag-documents
+      - MINIO_SECURE=false
+      
+      # Ollama configuration (host machine access)
+      - OLLAMA_HOST=host.docker.internal:11434
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      
+      # Application configuration
+      - LOG_LEVEL=INFO
+    
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    
+    networks:
+      - rag-network
+    
+    # Allow access to host machine for Ollama
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # PostgreSQL Database Service
+  postgres:
+    image: paradedb/paradedb:latest #This comes with all the need extensions installed
+    container_name: rag-postgres
+    environment:
+      - POSTGRES_DB=ragdb
+      - POSTGRES_USER=raguser
+      - POSTGRES_PASSWORD=ragpassword
+
+    ports:
+      - "5432:5432"
+    
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
+    networks:
+      - rag-network
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U raguser -d ragdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # MinIO Object Storage Service
+  minio:
+    image: minio/minio:latest
+    container_name: rag-minio
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin123
+      - MINIO_DEFAULT_BUCKETS=rag-documents
+    
+    ports:
+      - "9000:9000"  # API port
+      - "9001:9001"  # Console port
+    
+    volumes:
+      - minio_data:/data
+    
+    networks:
+      - rag-network
+    
+    restart: unless-stopped
+    
+    command: server /data --console-address ":9001"
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+      start_period: 30s
+
+  # MinIO Client for bucket initialization
+  minio-init:
+    image: minio/mc:latest
+    container_name: rag-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    
+    networks:
+      - rag-network
+    
+    entrypoint: >
+      /bin/sh -c "
+      echo 'Waiting for MinIO to be ready...';
+      sleep 10;
+      /usr/bin/mc alias set myminio http://minio:9000 minioadmin minioadmin123;
+      /usr/bin/mc mb myminio/rag-documents --ignore-existing;
+      /usr/bin/mc policy set public myminio/rag-documents;
+      echo 'MinIO bucket setup completed.';
+      "
+    
+    restart: "no"
+
+# Named volumes for persistent data storage
+volumes:
+  postgres_data:
+    driver: local
+    name: rag_postgres_data
+  
+  minio_data:
+    driver: local
+    name: rag_minio_data
+  
+# Custom network for service isolation
+networks:
+  rag-network:
+    driver: bridge
+    name: rag-network
+
